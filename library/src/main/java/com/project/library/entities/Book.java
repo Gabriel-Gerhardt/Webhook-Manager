@@ -12,6 +12,9 @@ public class Book {
         this.author_name = author_name;
         this.publish_year = publish_year;
     }
+    public Book(){
+
+    }
 
     public long getId() {
         return id;

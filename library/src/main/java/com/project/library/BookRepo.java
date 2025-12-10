@@ -4,6 +4,10 @@ import com.project.library.db.DB;
 import com.project.library.entities.Book;
 import org.springframework.stereotype.Repository;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +16,8 @@ import java.util.List;
 public class BookRepo {
 
     private final Connection conn;
-
+    private final String url = "http://localhost:8100/notification";
+    private HttpClient client = HttpClient.newHttpClient();
     public BookRepo(DB db) throws SQLException {
         this.conn = db.dbConnection();
     }
@@ -36,6 +41,18 @@ public class BookRepo {
         st.setString(3,author);
         st.setInt(4,publish_year);
         st.executeUpdate();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        try {
+            HttpResponse<String> response =  client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("Status: " + response.statusCode());
+            System.out.println("Body: " + response.body());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void InsertBookList(List<Book> listBook) throws SQLException{
@@ -93,7 +110,6 @@ public class BookRepo {
         if(rs.next()) {
             do {
                 book = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("author"), rs.getInt("publish_year"));
-                System.out.println(book);
             } while(rs.next());
         }
         return book;

@@ -26,4 +26,9 @@ public class BookController {
     public void postBook(@RequestBody Book book) throws SQLException {
         bookRepo.CreateBook(book);
     }
+
+    @PostMapping("/batch")
+    public void postBookBatch(@RequestBody List<Book> books) throws SQLException{
+        bookRepo.InsertBookList(books);
+    }
 }
