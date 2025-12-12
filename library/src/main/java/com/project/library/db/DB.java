@@ -3,10 +3,7 @@ package com.project.library.db;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,5 +35,8 @@ public class DB {
         for(String sql : tableList) {
             statement.executeUpdate(sql);
         }
+    }
+    public static void createTable(PreparedStatement statement) throws SQLException{
+        statement.executeUpdate();
     }
 }

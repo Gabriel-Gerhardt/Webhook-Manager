@@ -1,7 +1,6 @@
-package com.project.library;
+package com.project.library.book;
 
 import com.project.library.db.DB;
-import com.project.library.entities.Book;
 import org.springframework.stereotype.Repository;
 
 import java.net.URI;
@@ -41,18 +40,7 @@ public class BookRepo {
         st.setString(3,author);
         st.setInt(4,publish_year);
         st.executeUpdate();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .build();
 
-        try {
-            HttpResponse<String> response =  client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("Status: " + response.statusCode());
-            System.out.println("Body: " + response.body());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void InsertBookList(List<Book> listBook) throws SQLException{

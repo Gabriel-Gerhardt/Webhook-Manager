@@ -1,7 +1,6 @@
-package com.project.library;
+package com.project.library.book;
 
 
-import com.project.library.entities.Book;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
