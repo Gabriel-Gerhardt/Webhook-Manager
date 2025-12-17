@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 public class DB {
-    static String DB_URL = "jdbc:oracle:thin:@localhost:1521/freepdb1";
+    static String DB_URL = "jdbc:oracle:thin:@oracleDB:1521/FREEPDB1";
     static final String ROOT_USER = "system";
     static final String ROOT_PASSWORD = "password";
 

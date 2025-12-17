@@ -1,0 +1,35 @@
+services:
+  oracleDB:
+    image: gvenzl/oracle-free
+    container_name: oracleDB
+    ports:
+      - "1521:1521"
+    healthcheck:
+      test: [ "CMD-SHELL", "echo 'SELECT 1 FROM dual;' | sqlplus -s system/password@//localhost:1521/FREEPDB1 | grep -q 1" ]
+      interval: 10s
+      retries: 10
+      start_period: 30s
+
+
+    environment:
+      ORACLE_USER: system
+      ORACLE_PASSWORD: password
+    volumes:
+      - oracle-data:/opt/oracle/oradat
+
+
+  library:
+    build: ./library
+    depends_on:
+       oracleDB:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+  user:
+    build: ./user
+    ports:
+      - "8100:8100"
+
+
+volumes:
+  oracle-data:
