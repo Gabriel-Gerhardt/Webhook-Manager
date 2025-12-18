@@ -16,9 +16,9 @@ import java.util.List;
 public class BookRepo {
 
     private final Connection conn;
-    private final String url = "http://localhost:8100/notification";
+    private final String url = "http://user:8100/notification";
     private HttpClient client = HttpClient.newHttpClient();
-    private HttpRequest request
+    private HttpRequest request;
     public BookRepo(DB db) throws SQLException {
         this.conn = db.dbConnection();
     }
