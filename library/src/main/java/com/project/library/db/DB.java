@@ -1,8 +1,6 @@
 package com.project.library.db;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

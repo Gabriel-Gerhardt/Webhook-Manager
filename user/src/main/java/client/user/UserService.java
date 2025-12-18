@@ -10,8 +10,8 @@ import java.io.IOException;
 public class UserService {
 
 
-    public void notification() {
-        String texto = "Um novo livro foi publicado";
+    public void notification(String payload) {
+        String texto = "Um novo livro foi publicado-> "+ payload;
         String caminhoArquivo = "/home/gabriel-gerhardt/roadmap/spring/webhook/user/notify.txt";
         try (
                 BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoArquivo,true))) {

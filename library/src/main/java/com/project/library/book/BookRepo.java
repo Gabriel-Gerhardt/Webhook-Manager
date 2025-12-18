@@ -3,6 +3,7 @@ package com.project.library.book;
 import com.project.library.db.DB;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -17,11 +18,12 @@ public class BookRepo {
     private final Connection conn;
     private final String url = "http://localhost:8100/notification";
     private HttpClient client = HttpClient.newHttpClient();
+    private HttpRequest request
     public BookRepo(DB db) throws SQLException {
         this.conn = db.dbConnection();
     }
 
-    public void CreateBook(Book book) throws SQLException {
+    public void CreateBook(Book book) throws SQLException, IOException, InterruptedException {
         PreparedStatement st;
         long id = book.getId();
         if(FindById(id) != null){
@@ -40,7 +42,12 @@ public class BookRepo {
         st.setString(3,author);
         st.setInt(4,publish_year);
         st.executeUpdate();
-
+        request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .POST(HttpRequest.BodyPublishers.ofString(book.toString()))
+                .build();
+        HttpResponse<String> response = client.send(request,
+                HttpResponse.BodyHandlers.ofString());
     }
 
     public void InsertBookList(List<Book> listBook) throws SQLException{

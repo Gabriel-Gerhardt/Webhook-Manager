@@ -22,9 +22,5 @@ public class WebhookController {
         urlRepo.registerUrl(incomingUrl,requestUrl);
     }
 
-    @GetMapping()
-    public String event(Object o){
-        return o.toString();
-    }
 
 }

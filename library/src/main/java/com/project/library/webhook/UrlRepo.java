@@ -37,5 +37,16 @@ public class UrlRepo {
         st.setString(1, requestUrl);
         st.executeUpdate();
     }
+    public void getUrl(String requestUrl) throws SQLException {
+    PreparedStatement st = conn.prepareStatement("SELECT incoming_url FROM webhooks "+
+            "WHERE target_url = "
+                    +"(?)"
+            );
+    //st.setString(incomingUrl);
+    }
+
+    public String event(Object o){
+        return o.toString();
+    }
 
 }

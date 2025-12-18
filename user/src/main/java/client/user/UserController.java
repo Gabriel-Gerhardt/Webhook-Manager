@@ -1,8 +1,6 @@
 package client.user;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/notification")
@@ -15,9 +13,9 @@ public class UserController {
     }
 
 
-    @GetMapping
-    public void bookNotification(){
-         service.notification();
+    @PostMapping()
+    public void bookNotification(@RequestBody String payload){
+         service.notification(payload);
     }
 
 }
