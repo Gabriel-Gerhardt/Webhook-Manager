@@ -103,11 +103,8 @@ public class BookRepo {
         st = conn.prepareStatement("SELECT * FROM books WHERE id = ?");
         st.setLong(1,id);
         rs = st.executeQuery();
-
         if(rs.next()) {
-            do {
                 book = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("author"), rs.getInt("publish_year"));
-            } while(rs.next());
         }
         return book;
     }

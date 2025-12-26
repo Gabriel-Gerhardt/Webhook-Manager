@@ -1,0 +1,5 @@
+services:
+  user:
+    build: .
+    ports:
+      - "8100:8100"
