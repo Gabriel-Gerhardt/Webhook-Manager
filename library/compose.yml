@@ -1,0 +1,14 @@
+services:
+  oracleDB:
+    image: gvenzl/oracle-free
+    container_name: oracleDB
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_USER: system
+      ORACLE_PASSWORD: password
+    volumes:
+      - oracle-data:/opt/oracle/oradat
+
+volumes:
+  oracle-data:

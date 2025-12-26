@@ -1,6 +1,8 @@
-package com.project.library.book;
+package com.project.library.controller;
 
 
+import com.project.library.repo.BookRepo;
+import com.project.library.entities.Book;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;

@@ -1,11 +1,10 @@
-package com.project.library.webhook;
+package com.project.library.entities;
 
 import com.project.library.db.DB;
+import com.project.library.webhook.UrlMapper;
 import org.springframework.stereotype.Repository;
 
-import java.net.URI;
 import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

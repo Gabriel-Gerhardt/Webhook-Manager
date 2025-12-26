@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class LibraryApplication {
 
     public static void main(String[] args) throws SQLException {
+        DB.dbConnection();
         SpringApplication.run(LibraryApplication.class,args);
     }
 }

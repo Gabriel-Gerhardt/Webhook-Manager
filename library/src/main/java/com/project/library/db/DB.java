@@ -7,11 +7,11 @@ import java.util.List;
 
 @Component
 public class DB {
-    static String DB_URL = "jdbc:oracle:thin:@oracleDB:1521/FREEPDB1";
+    static String DB_URL = "jdbc:oracle:thin:@localhost:1521/FREEPDB1";
     static final String ROOT_USER = "system";
     static final String ROOT_PASSWORD = "password";
 
-    public Connection dbConnection() throws SQLException {
+    public static Connection dbConnection() throws SQLException {
         Connection conn = null;
         conn = DriverManager.getConnection(DB_URL, ROOT_USER, ROOT_PASSWORD);
         try (Statement stmt = conn.createStatement()) {
