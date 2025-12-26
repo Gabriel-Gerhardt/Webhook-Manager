@@ -21,6 +21,14 @@ public class BookService {
         lista.sort(new BookComparatorByTitle());
         return lista;
     }
+
+    public List<Book> findAllSortedById() throws SQLException {
+        List<Book> lista = bookRepo.findAll();
+        lista.sort((b1,b2)-> {
+            return Long.compare(b1.getId(), b2.getId());
+        });
+        return lista;
+    }
     public void insertBook(Book book) throws SQLException, IOException, InterruptedException {
         if(bookRepo.findById(book.getId())!=null){
             throw new IllegalArgumentException("Book id already exists");

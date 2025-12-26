@@ -78,23 +78,6 @@ public class BookRepo {
         return lista;
 
     }
-    public List<Book> findAllOrdenatedByPublishYear() throws SQLException {
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        List<Book> lista = new ArrayList<>();
-        st = conn.prepareStatement("SELECT * FROM books");
-        rs = st.executeQuery();
-        if (rs.next()) {
-            while (true) {
-                Book book = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("author"), rs.getInt("publish_year"));
-                lista.add(book);
-                if (!rs.next()) {
-                    break;
-                }
-            }
-        }
-        return lista;
-    }
 
     public Book findById(long id) throws SQLException{
         PreparedStatement st;
