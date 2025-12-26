@@ -6,10 +6,8 @@ import com.project.library.entities.Book;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +23,9 @@ public class BookRepo {
         this.conn = db.dbConnection();
     }
 
-    public void CreateBook(Book book) throws SQLException, IOException, InterruptedException {
+    public void insertBook(Book book) throws SQLException, IOException, InterruptedException {
         PreparedStatement st;
         long id = book.getId();
-        if(FindById(id) != null){
-            return;
-        }
         String title = book.getTitle();
         String author = book.getAuthorName();
         int publish_year = book.getPublishYear();
@@ -44,21 +39,12 @@ public class BookRepo {
         st.setString(3,author);
         st.setInt(4,publish_year);
         st.executeUpdate();
-        request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .POST(HttpRequest.BodyPublishers.ofString(book.toString()))
-                .build();
-        HttpResponse<String> response = client.send(request,
-                HttpResponse.BodyHandlers.ofString());
     }
 
-    public void InsertBookList(List<Book> listBook) throws SQLException{
+    public void insertBookList(List<Book> listBook) throws SQLException{
         PreparedStatement st;
         for(Book book : listBook) {
             long id = book.getId();
-            if(FindById(id) != null){
-                return;
-            }
             String title = book.getTitle();
             String author = book.getAuthorName();
             int publish_year = book.getPublishYear();
@@ -74,14 +60,12 @@ public class BookRepo {
             st.executeUpdate();
         }
     }
-    public List<Book> FindAll() throws SQLException {
+    public List<Book> findAll() throws SQLException {
         PreparedStatement st = null;
         ResultSet rs = null;
         List<Book> lista = new ArrayList<>();
         st = conn.prepareStatement("SELECT * FROM books");
-
         rs = st.executeQuery();
-
         if (rs.next()) {
             while (true) {
                 Book book = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("author"), rs.getInt("publish_year"));
@@ -91,18 +75,15 @@ public class BookRepo {
                 }
             }
         }
-        lista.sort(new BookComparatorByTitle());
         return lista;
 
     }
-    public List<Book> FindAllOrdenatedById() throws SQLException {
+    public List<Book> findAllOrdenatedByPublishYear() throws SQLException {
         PreparedStatement st = null;
         ResultSet rs = null;
         List<Book> lista = new ArrayList<>();
         st = conn.prepareStatement("SELECT * FROM books");
-
         rs = st.executeQuery();
-
         if (rs.next()) {
             while (true) {
                 Book book = new Book(rs.getInt("id"), rs.getString("title"), rs.getString("author"), rs.getInt("publish_year"));
@@ -112,17 +93,15 @@ public class BookRepo {
                 }
             }
         }
-        lista.sort(new BookComparatorByTitle());
         return lista;
     }
 
-    private Book FindById(long id) throws SQLException{
+    public Book findById(long id) throws SQLException{
         PreparedStatement st;
         ResultSet rs = null;
         Book book = null;
         st = conn.prepareStatement("SELECT * FROM books WHERE id = ?");
         st.setLong(1,id);
-
         rs = st.executeQuery();
 
         if(rs.next()) {
@@ -132,7 +111,7 @@ public class BookRepo {
         }
         return book;
     }
-    public void UpdateById(Book book, long id) throws SQLException {
+    public void updateById(Book book, long id) throws SQLException {
         PreparedStatement st;
         String title = book.getTitle();
         String author = book.getAuthorName();
@@ -148,7 +127,7 @@ public class BookRepo {
         st.setLong(4, id);
         st.executeUpdate();
     }
-    public void DeleteById(long id) throws SQLException{
+    public void deleteById(long id) throws SQLException{
         PreparedStatement st;
         st = conn.prepareStatement("DELETE FROM books "+
                 "WHERE id = ?");

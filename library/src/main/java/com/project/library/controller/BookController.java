@@ -1,8 +1,8 @@
 package com.project.library.controller;
 
 
-import com.project.library.repo.BookRepo;
 import com.project.library.entities.Book;
+import com.project.library.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -13,24 +13,24 @@ import java.util.List;
 @RequestMapping("/books")
 public class BookController {
     
-    private final BookRepo bookRepo;
-    public BookController(BookRepo bookRepo){
-        this.bookRepo = bookRepo;
+    private final BookService bookService;
+    public BookController(BookService bookRepo){
+        this.bookService = bookRepo;
     }
     
     
     @GetMapping
     public List<Book> getAllBooks() throws SQLException {
-        return bookRepo.FindAll();
+        return bookService.findAll();
     }
 
     @PostMapping
     public void postBook(@RequestBody Book book) throws SQLException, IOException, InterruptedException {
-        bookRepo.CreateBook(book);
+        bookService.insertBook(book);
     }
 
     @PostMapping("/batch")
     public void postBookBatch(@RequestBody List<Book> books) throws SQLException{
-        bookRepo.InsertBookList(books);
+        bookService.insertBookList(books);
     }
 }
