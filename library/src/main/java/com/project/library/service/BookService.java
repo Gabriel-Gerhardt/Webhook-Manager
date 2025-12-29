@@ -1,6 +1,7 @@
 package com.project.library.service;
 
-import com.project.library.bookStrategy.BookComparatorByTitle;
+import com.project.library.bookStrategy.comparator.BookComparatorByPublishYear;
+import com.project.library.bookStrategy.comparator.BookComparatorByTitle;
 import com.project.library.entities.Book;
 import com.project.library.repo.BookRepo;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,14 @@ public class BookService {
         lista.sort((b1,b2)-> {
             return Long.compare(b1.getId(), b2.getId());
         });
+        lista.removeIf((b1)->{
+            return b1.getPublishYear()>1900;
+        });
+        return lista;
+    }
+    public List<Book> findAllSortedByPublishYear() throws SQLException {
+        List<Book> lista = bookRepo.findAll();
+        lista.sort(new BookComparatorByPublishYear());
         return lista;
     }
     public void insertBook(Book book) throws SQLException, IOException, InterruptedException {

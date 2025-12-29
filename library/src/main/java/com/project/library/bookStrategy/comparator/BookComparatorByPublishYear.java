@@ -1,4 +1,4 @@
-package com.project.library.bookStrategy;
+package com.project.library.bookStrategy.comparator;
 
 import com.project.library.entities.Book;
 
