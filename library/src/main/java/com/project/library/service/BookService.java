@@ -2,6 +2,8 @@ package com.project.library.service;
 
 import com.project.library.bookStrategy.comparator.BookComparatorByPublishYear;
 import com.project.library.bookStrategy.comparator.BookComparatorByTitle;
+import com.project.library.bookStrategy.consumer.BookConsumer;
+import com.project.library.bookStrategy.consumer.BookConsumerSetTitle;
 import com.project.library.bookStrategy.predicate.BookPredicate;
 import com.project.library.entities.Book;
 import com.project.library.repo.BookRepo;
@@ -25,7 +27,9 @@ public class BookService {
     }
     public List<Book> findAllSortedByPublishYear() throws SQLException {
         return bookRepo.findAll().stream()
-                .sorted(new BookComparatorByPublishYear()).toList();
+                .sorted(new BookComparatorByPublishYear())
+                .peek(new BookConsumerSetTitle())
+                .toList();
     }
     public void insertBook(Book book) throws SQLException, IOException, InterruptedException {
         if(bookRepo.findById(book.getId())!=null){
