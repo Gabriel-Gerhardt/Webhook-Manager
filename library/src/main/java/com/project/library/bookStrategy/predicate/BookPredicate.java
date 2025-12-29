@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 public class BookPredicate implements Predicate<Book> {
 
     @Override
-    public boolean test(Book book) {
-        return book.getPublishYear()> 1900;
+    public boolean test (Book book) {
+        return book.getPublishYear() > 1900;
     }
 }

@@ -2,6 +2,7 @@ package com.project.library.service;
 
 import com.project.library.bookStrategy.comparator.BookComparatorByPublishYear;
 import com.project.library.bookStrategy.comparator.BookComparatorByTitle;
+import com.project.library.bookStrategy.predicate.BookPredicate;
 import com.project.library.entities.Book;
 import com.project.library.repo.BookRepo;
 import org.springframework.stereotype.Service;
@@ -18,25 +19,12 @@ public class BookService {
         this.bookRepo = bookRepo;
     }
     public List<Book> findAll() throws SQLException {
-        List<Book> lista = bookRepo.findAll();
-        lista.sort(new BookComparatorByTitle());
-        return lista;
-    }
-
-    public List<Book> findAllSortedById() throws SQLException {
-        List<Book> lista = bookRepo.findAll();
-        lista.sort((b1,b2)-> {
-            return Long.compare(b1.getId(), b2.getId());
-        });
-        lista.removeIf((b1)->{
-            return b1.getPublishYear()>1900;
-        });
-        return lista;
+        return bookRepo.findAll().stream()
+                .sorted(new BookComparatorByTitle()).toList();
     }
     public List<Book> findAllSortedByPublishYear() throws SQLException {
-        List<Book> lista = bookRepo.findAll();
-        lista.sort(new BookComparatorByPublishYear());
-        return lista;
+        return bookRepo.findAll().stream()
+                .sorted(new BookComparatorByPublishYear()).toList();
     }
     public void insertBook(Book book) throws SQLException, IOException, InterruptedException {
         if(bookRepo.findById(book.getId())!=null){
