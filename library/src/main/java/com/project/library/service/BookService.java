@@ -20,7 +20,8 @@ public class BookService {
     }
     public List<Book> findAll() throws SQLException {
         return bookRepo.findAll().stream()
-                .sorted(new BookComparatorByTitle()).toList();
+                .sorted(new BookComparatorByTitle())
+                .toList();
     }
     public List<Book> findAllSortedByPublishYear() throws SQLException {
         return bookRepo.findAll().stream()
@@ -33,7 +34,6 @@ public class BookService {
         else{
             bookRepo.insertBook(book);
         }
-
     }
     public void insertBookList(List<Book> books) throws SQLException {
         for(Book book : books){
