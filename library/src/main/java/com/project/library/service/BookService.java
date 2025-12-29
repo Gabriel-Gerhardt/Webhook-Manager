@@ -2,9 +2,7 @@ package com.project.library.service;
 
 import com.project.library.bookStrategy.comparator.BookComparatorByPublishYear;
 import com.project.library.bookStrategy.comparator.BookComparatorByTitle;
-import com.project.library.bookStrategy.consumer.BookConsumer;
 import com.project.library.bookStrategy.consumer.BookConsumerSetTitle;
-import com.project.library.bookStrategy.predicate.BookPredicate;
 import com.project.library.entities.Book;
 import com.project.library.repo.BookRepo;
 import org.springframework.stereotype.Service;
