@@ -25,7 +25,7 @@ public class BookController {
     }
 
     @PostMapping
-    public void postBook(@RequestBody Book book) throws SQLException, IOException, InterruptedException {
+    public void postBook(@RequestBody Book book) throws SQLException {
         bookService.insertBook(book);
     }
 

@@ -22,7 +22,7 @@ public class BookRepo {
         this.conn = db.dbConnection();
     }
 
-    public void insertBook(Book book) throws SQLException, IOException, InterruptedException {
+    public void insertBook (Book book) throws SQLException {
         PreparedStatement st;
         long id = book.getId();
         String title = book.getTitle();
@@ -40,7 +40,7 @@ public class BookRepo {
         st.executeUpdate();
     }
 
-    public void insertBookList(List<Book> listBook) throws SQLException{
+    public void insertBookList (List<Book> listBook) throws SQLException{
         PreparedStatement st;
         for(Book book : listBook) {
             long id = book.getId();
@@ -78,7 +78,7 @@ public class BookRepo {
 
     }
 
-    public Book findById(long id) throws SQLException{
+    public Book findById (long id) throws SQLException{
         PreparedStatement st;
         ResultSet rs = null;
         Book book = null;
@@ -90,7 +90,7 @@ public class BookRepo {
         }
         return book;
     }
-    public void updateById(Book book, long id) throws SQLException {
+    public void updateById (Book book, long id) throws SQLException {
         PreparedStatement st;
         String title = book.getTitle();
         String author = book.getAuthorName();
@@ -106,7 +106,7 @@ public class BookRepo {
         st.setLong(4, id);
         st.executeUpdate();
     }
-    public void deleteById(long id) throws SQLException{
+    public void deleteById (long id) throws SQLException{
         PreparedStatement st;
         st = conn.prepareStatement("DELETE FROM books "+
                 "WHERE id = ?");

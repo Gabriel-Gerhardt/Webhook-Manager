@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 public class BookConsumerSetTitle implements Consumer<Book> {
     @Override
-    public void accept(Book book) {
+    public void accept (Book book) {
         book.setTitle(book.getTitle() + " " + book.getPublishYear());
     }
 }
