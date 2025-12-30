@@ -1,11 +1,12 @@
 package com.project.library.service;
 
-import com.project.library.bookStrategy.comparator.BookComparatorByAuthor;
-import com.project.library.bookStrategy.comparator.BookComparatorByPublishYear;
-import com.project.library.bookStrategy.comparator.BookComparatorByTitle;
+import com.project.library.contract.BookServiceContract;
+import com.project.library.utils.strategy.bookStrategy.comparator.BookComparatorByAuthor;
+import com.project.library.utils.strategy.bookStrategy.comparator.BookComparatorByPublishYear;
+import com.project.library.utils.strategy.bookStrategy.comparator.BookComparatorByTitle;
 import com.project.library.entities.Book;
-import com.project.library.exception.IdAlreadyExistsException;
-import com.project.library.repo.BookRepo;
+import com.project.library.utils.exception.IdAlreadyExistsException;
+import com.project.library.repo.repo.BookRepo;
 
 import org.springframework.stereotype.Service;
 import java.sql.SQLException;
@@ -13,21 +14,27 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class BookService {
+public class BookService implements BookServiceContract {
     private final BookRepo bookRepo;
 
     public BookService (BookRepo bookRepo){
         this.bookRepo = bookRepo;
     }
+
+    @Override
     public List<Book> findAll(String sortBy) throws SQLException {
         return bookRepo.findAll().stream()
                 .sorted(chooseSortMethod(sortBy))
                 .toList();
     }
+
+    @Override
     public void insertBook (Book book) throws SQLException {
         assertBookDoesNotExist(book);
         bookRepo.insertBook(book);
     }
+
+    @Override
     public void insertBookList (List<Book> books) throws SQLException {
         for(Book book : books){
             assertBookDoesNotExist(book);

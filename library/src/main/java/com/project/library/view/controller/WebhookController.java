@@ -1,4 +1,4 @@
-package com.project.library.controller;
+package com.project.library.view.controller;
 
 
 import com.project.library.entities.UrlRepo;

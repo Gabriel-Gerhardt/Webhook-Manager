@@ -1,6 +1,6 @@
 package com.project.library;
 
-import com.project.library.db.DB;
+import com.project.library.repo.db.DB;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package com.project.library.webhook;
+package com.project.library.view.webhook;
 
 import java.util.HashMap;
 import java.util.Map;

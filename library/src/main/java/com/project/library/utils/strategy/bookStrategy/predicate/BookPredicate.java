@@ -1,4 +1,4 @@
-package com.project.library.bookStrategy.predicate;
+package com.project.library.utils.strategy.bookStrategy.predicate;
 
 import com.project.library.entities.Book;
 

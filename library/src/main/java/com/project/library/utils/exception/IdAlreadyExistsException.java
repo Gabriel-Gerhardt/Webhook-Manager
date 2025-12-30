@@ -1,4 +1,4 @@
-package com.project.library.exception;
+package com.project.library.utils.exception;
 
 public class IdAlreadyExistsException extends RuntimeException{
     private String message;

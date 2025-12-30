@@ -1,4 +1,4 @@
-package com.project.library.db;
+package com.project.library.repo.db;
 
 import org.springframework.stereotype.Component;
 import java.sql.*;
@@ -12,8 +12,7 @@ public class DB {
     static final String ROOT_PASSWORD = "password";
 
     public static Connection dbConnection() throws SQLException {
-        Connection conn = null;
-        conn = DriverManager.getConnection(DB_URL, ROOT_USER, ROOT_PASSWORD);
+        Connection conn = DriverManager.getConnection(DB_URL, ROOT_USER, ROOT_PASSWORD);
         try (Statement stmt = conn.createStatement()) {
             String grantSQL = "GRANT CONNECT, RESOURCE TO system";
             stmt.executeUpdate(grantSQL);

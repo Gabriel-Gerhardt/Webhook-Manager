@@ -1,4 +1,4 @@
-package com.project.library.bookStrategy.function;
+package com.project.library.utils.strategy.bookStrategy.function;
 
 import com.project.library.entities.Book;
 

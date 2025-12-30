@@ -1,6 +1,6 @@
-package com.project.library.repo;
+package com.project.library.repo.repo;
 
-import com.project.library.db.DB;
+import com.project.library.repo.db.DB;
 import com.project.library.entities.Book;
 import org.springframework.stereotype.Repository;
 

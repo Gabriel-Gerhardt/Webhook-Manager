@@ -1,4 +1,4 @@
-package com.project.library.bookStrategy.consumer;
+package com.project.library.utils.strategy.bookStrategy.consumer;
 
 import com.project.library.entities.Book;
 

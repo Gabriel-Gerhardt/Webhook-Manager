@@ -1,13 +1,11 @@
-package com.project.library.controller;
+package com.project.library.view.controller;
 
 
 import com.project.library.entities.Book;
 import com.project.library.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Comparator;
 import java.util.List;
 
 @RestController
