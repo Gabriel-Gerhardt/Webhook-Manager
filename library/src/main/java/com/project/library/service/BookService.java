@@ -21,7 +21,7 @@ public class BookService {
     }
     public List<Book> findAll(String sortBy) throws SQLException {
         return bookRepo.findAll().stream()
-                .sorted(chooseComparator(sortBy))
+                .sorted(chooseSortMethod(sortBy))
                 .toList();
     }
     public void insertBook (Book book) throws SQLException {
@@ -39,7 +39,7 @@ public class BookService {
             throw new IdAlreadyExistsException("Book id " + book.getId() + " already exists");
         }
     }
-    private Comparator<Book> chooseComparator(String sortBy){
+    private Comparator<Book> chooseSortMethod(String sortBy){
         return switch (sortBy) {
             case "author" -> new BookComparatorByAuthor();
             case "title" -> new BookComparatorByTitle();
