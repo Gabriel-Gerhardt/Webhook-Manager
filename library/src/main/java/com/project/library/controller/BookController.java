@@ -15,14 +15,14 @@ import java.util.List;
 public class BookController {
     
     private final BookService bookService;
-    public BookController(BookService bookRepo){
-        this.bookService = bookRepo;
+    public BookController(BookService bookService){
+        this.bookService = bookService;
     }
     
     
     @GetMapping
-    public List<Book> getAllBooks(Comparator<Book> comp) throws SQLException {
-        return bookService.findAll(comp);
+    public List<Book> getAllBooks(@RequestParam(required = false) String sortBy) throws SQLException {
+        return bookService.findAll(sortBy);
     }
 
     @PostMapping

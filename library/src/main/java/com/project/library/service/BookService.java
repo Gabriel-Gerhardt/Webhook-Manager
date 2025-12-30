@@ -1,5 +1,8 @@
 package com.project.library.service;
 
+import com.project.library.bookStrategy.comparator.BookComparatorByAuthor;
+import com.project.library.bookStrategy.comparator.BookComparatorByPublishYear;
+import com.project.library.bookStrategy.comparator.BookComparatorByTitle;
 import com.project.library.entities.Book;
 import com.project.library.exception.IdAlreadyExistsException;
 import com.project.library.repo.BookRepo;
@@ -16,9 +19,9 @@ public class BookService {
     public BookService (BookRepo bookRepo){
         this.bookRepo = bookRepo;
     }
-    public List<Book> findAll(Comparator<Book> comp) throws SQLException {
+    public List<Book> findAll(String sortBy) throws SQLException {
         return bookRepo.findAll().stream()
-                .sorted(comp)
+                .sorted(chooseComparator(sortBy))
                 .toList();
     }
     public void insertBook (Book book) throws SQLException {
@@ -35,5 +38,12 @@ public class BookService {
         if(bookRepo.findById(book.getId())!=null){
             throw new IdAlreadyExistsException("Book id " + book.getId() + " already exists");
         }
+    }
+    private Comparator<Book> chooseComparator(String sortBy){
+        return switch (sortBy) {
+            case "author" -> new BookComparatorByAuthor();
+            case "title" -> new BookComparatorByTitle();
+            default -> new BookComparatorByPublishYear();
+        };
     }
 }

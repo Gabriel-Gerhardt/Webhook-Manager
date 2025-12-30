@@ -15,7 +15,6 @@ import java.util.Map;
 public class UrlRepo {
 
     private final Connection conn;
-    private final String url = "http://localhost:8100/notification";
     private HttpClient client = HttpClient.newHttpClient();
     public UrlRepo(DB db) throws SQLException {
         this.conn = db.dbConnection();
