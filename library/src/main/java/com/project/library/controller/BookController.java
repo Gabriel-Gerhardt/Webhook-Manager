@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -20,8 +21,8 @@ public class BookController {
     
     
     @GetMapping
-    public List<Book> getAllBooks() throws SQLException {
-        return bookService.findAll();
+    public List<Book> getAllBooks(Comparator<Book> comp) throws SQLException {
+        return bookService.findAll(comp);
     }
 
     @PostMapping
