@@ -1,6 +1,6 @@
 package com.project.library.entities;
 
-import com.project.library.repo.db.DB;
+import com.project.library.repo.dbConfig.DB;
 import com.project.library.view.webhook.UrlMapper;
 import org.springframework.stereotype.Repository;
 

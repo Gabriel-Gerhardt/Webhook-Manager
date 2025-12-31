@@ -5,7 +5,6 @@ import com.project.library.entities.Book;
 import com.project.library.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -19,17 +18,17 @@ public class BookController {
     
     
     @GetMapping
-    public List<Book> getAllBooks(@RequestParam(required = false) String sortBy) throws SQLException {
+    public List<Book> getAllBooks(@RequestParam(required = false) String sortBy) {
         return bookService.findAll(sortBy);
     }
 
     @PostMapping
-    public void postBook(@RequestBody Book book) throws SQLException {
+    public void postBook(@RequestBody Book book) {
         bookService.insertBook(book);
     }
 
     @PostMapping("/batch")
-    public void postBookBatch(@RequestBody List<Book> books) throws SQLException{
+    public void postBookBatch(@RequestBody List<Book> books) {
         bookService.insertBookList(books);
     }
 }
