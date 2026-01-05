@@ -1,11 +1,7 @@
 package com.manager.webhook.entities;
 
 import jakarta.persistence.*;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,8 +10,7 @@ import java.util.UUID;
 @Table(name = "webhooks")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Url {
 
     @Id
@@ -26,6 +21,6 @@ public class Url {
     @Column(nullable = false)
     private String url;
 
-    private List<String> events; //new book - new book List
+    private List<String> events;
 
 }

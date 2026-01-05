@@ -1,5 +1,6 @@
 package com.manager.webhook.service;
 
+import com.manager.webhook.contract.UrlServiceContract;
 import com.manager.webhook.entities.Event;
 import com.manager.webhook.entities.Url;
 import com.manager.webhook.exception.NoValidEventFound;
@@ -7,10 +8,12 @@ import com.manager.webhook.mapper.UrlMapper;
 import com.manager.webhook.model.UrlModel;
 import com.manager.webhook.repo.EventRepo;
 import com.manager.webhook.repo.UrlRepo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class UrlService {
+@Service
+public class UrlService implements UrlServiceContract {
     private final UrlRepo urlRepo;
     private final EventRepo eventRepo;
     public UrlService(UrlRepo urlRepo, EventRepo eventRepo){
@@ -23,10 +26,8 @@ public class UrlService {
         Url urlRequest = UrlMapper.toEntity(urlModel);
         urlRequest.setEvents(filteredEvents);
         urlRepo.save(urlRequest);
-
     }
-
-    public List<String> validEvents(UrlModel urlModel){
+    private List<String> validEvents(UrlModel urlModel){
         List<String> allEventNames = eventRepo.findAll().stream()
                 .map(Event::getName)
                 .toList();
@@ -36,7 +37,7 @@ public class UrlService {
                 .toList();
 
         if(filtered.isEmpty()){
-            throw new NoValidEventFound("No valid event to " + urlModel.url());
+            throw new NoValidEventFound("No valid event to " + urlModel.url() + " in " + urlModel.events());
         }
         return filtered;
     }
