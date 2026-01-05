@@ -12,7 +12,7 @@ import java.util.List;
 public class BookRepo {
 
     private final Connection conn;
-    
+
     public BookRepo(DB db)  {
         this.conn = db.dbConnection();
     }
