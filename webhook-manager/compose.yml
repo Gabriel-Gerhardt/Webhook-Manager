@@ -1,0 +1,15 @@
+services:
+  webhook-postgres:
+    image: postgres:18-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: webhookDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - webhook-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  webhook-postgres-data:

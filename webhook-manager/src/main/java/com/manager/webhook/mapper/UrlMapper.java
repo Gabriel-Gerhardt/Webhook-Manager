@@ -1,14 +1,15 @@
 package com.manager.webhook.mapper;
 
-import com.manager.webhook.entities.UrlRequest;
+import com.manager.webhook.entities.Url;
 import com.manager.webhook.model.UrlModel;
 
-import java.util.function.Function;
+public class UrlMapper{
 
-public class UrlEntityToUrlModel implements Function<UrlRequest, UrlModel> {
+    public static UrlModel toModel(Url urlRequest) {
+        return new UrlModel(urlRequest.getId(),urlRequest.getUrl(), urlRequest.getEvents());
+    }
+    public static Url toEntity(UrlModel urlModel){
+        return new Url(urlModel.id(),urlModel.url(), urlModel.events());
 
-    @Override
-    public UrlModel apply(UrlRequest urlRequest) {
-        return null;
     }
 }

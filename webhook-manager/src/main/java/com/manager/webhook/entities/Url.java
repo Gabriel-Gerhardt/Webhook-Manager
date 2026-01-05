@@ -2,17 +2,21 @@ package com.manager.webhook.entities;
 
 import jakarta.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "webhook")
+@Table(name = "webhooks")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class UrlRequest {
+public class Url {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,4 +27,5 @@ public class UrlRequest {
     private String url;
 
     private List<String> events; //new book - new book List
+
 }
