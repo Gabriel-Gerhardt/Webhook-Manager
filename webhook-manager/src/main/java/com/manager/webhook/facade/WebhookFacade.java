@@ -12,6 +12,8 @@ import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+
 @Component
 public class WebhookFacade {
     private final UrlService urlService;
@@ -45,6 +47,7 @@ public class WebhookFacade {
     public void sendPayload(String payload,String url){
         restClient.post()
                 .uri(url)
+                .contentType(APPLICATION_JSON)
                 .body(payload)
                 .retrieve()
                 .onStatus(
