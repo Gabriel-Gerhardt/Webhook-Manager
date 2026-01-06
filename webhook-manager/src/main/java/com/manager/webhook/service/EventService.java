@@ -28,7 +28,7 @@ public class EventService implements UrlServiceContract {
                 .toList();
     }
     public EventModel findByEvent(String event){
-        Event eventEntity = eventRepo.findByEvent(event);
+        Event eventEntity = eventRepo.findByName(event);
         if(eventEntity==null){
             throw new EventNotFoundException("Event " + event + " does not exists");
         }

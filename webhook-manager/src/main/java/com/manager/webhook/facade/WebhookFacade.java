@@ -1,5 +1,6 @@
 package com.manager.webhook.facade;
 
+import com.manager.webhook.bean.BeanClient;
 import com.manager.webhook.exception.WebhookException;
 import com.manager.webhook.model.EventModel;
 import com.manager.webhook.model.UrlModel;
@@ -51,8 +52,8 @@ public class WebhookFacade {
                 .body(payload)
                 .retrieve()
                 .onStatus(
-                        HttpStatusCode::isError,  // Predicate<HttpStatusCode>
-                        (request, response) -> {     // ResponseSpec.ErrorHandler
+                        HttpStatusCode::isError,
+                        (request, response) -> {
                             throw new WebhookException(
                                     "Erro no webhook: ",  response.getStatusCode().toString()
                             );
