@@ -6,6 +6,8 @@ import com.manager.webhook.service.EventService;
 import com.manager.webhook.service.UrlService;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class WebhookFacade {
     private final UrlService urlService;
@@ -19,5 +21,18 @@ public class WebhookFacade {
     }
     public void saveUrl(UrlModel url){
         urlService.save(url);
+    }
+    public void payloadHandler(String payload, String event){
+        EventModel eventModel = eventService.findByEvent(event);
+        List<UrlModel> urls = urlService.findAll();
+
+        urls.stream()
+                .flatMap(url -> url.events().stream()
+                        .filter(e -> e.equals(eventModel.name()))
+                        .map(e -> url))
+                .forEach(url -> sendPayload(payload, url.url()));
+    }
+    public void sendPayload(String payload,String url){
+
     }
 }

@@ -24,4 +24,8 @@ public class WebhookController {
     public void saveEvent(@RequestBody EventModel eventModel){
         webhookFacade.saveEvent(eventModel);
     }
+    @PostMapping("/payload")
+    public void postPayloadHandler(@RequestBody String payload, String event){
+        webhookFacade.payloadHandler(payload, event);
+    }
 }

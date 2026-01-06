@@ -27,6 +27,15 @@ public class UrlService implements UrlServiceContract {
         urlRequest.setEvents(filteredEvents);
         urlRepo.save(urlRequest);
     }
+    public List<UrlModel> findAll(){
+        return urlRepo.findAll()
+                .stream()
+                .map(UrlMapper::toModel)
+                .toList();
+    }
+    public UrlModel findByUrl(String url){
+        return UrlMapper.toModel(urlRepo.findByUrl(url));
+    }
     private List<String> validEvents(UrlModel urlModel){
         List<String> allEventNames = eventRepo.findAll().stream()
                 .map(Event::getName)
