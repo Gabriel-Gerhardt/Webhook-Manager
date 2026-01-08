@@ -27,10 +27,10 @@ public class EventService implements UrlServiceContract {
                 .map(EventMapper::toModel)
                 .toList();
     }
-    public EventModel findByEvent(String event){
-        Event eventEntity = eventRepo.findByName(event);
+    public EventModel findByName(String name){
+        Event eventEntity = eventRepo.findByNameIgnoreCase(name);
         if(eventEntity==null){
-            throw new EventNotFoundException("Event " + event + " does not exists");
+            throw new EventNotFoundException("Event " + name + " does not exists");
         }
         return EventMapper.toModel(eventEntity);
     }

@@ -14,7 +14,7 @@ public class UserController {
 
 
     @PostMapping()
-    public void bookNotification(@RequestBody String payload){
+    public void receiveNotification(@RequestBody String payload){
          service.notification(payload);
     }
 

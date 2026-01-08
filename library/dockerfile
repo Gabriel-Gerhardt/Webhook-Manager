@@ -1,8 +1,12 @@
 FROM eclipse-temurin:21
 RUN mkdir /library
 WORKDIR /library
-COPY . .
+COPY build.gradle .
+COPY settings.gradle .
+COPY gradlew .
+COPY gradle/wrapper gradle/wrapper
 RUN ./gradlew build --no-daemon
+COPY . .
 EXPOSE 8080
 
 CMD ["java","-jar","build/libs/library-0.0.1-SNAPSHOT.jar"]

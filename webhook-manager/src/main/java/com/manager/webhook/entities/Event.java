@@ -23,5 +23,8 @@ public class Event {
 
     @Column(nullable = false)
     String url;
-
+    public Event(String name, String url){
+        this.name = name;
+        this.url = url;
+    }
 }

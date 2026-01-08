@@ -1,0 +1,17 @@
+FROM eclipse-temurin:21
+RUN mkdir /manager
+
+WORKDIR /manager
+
+COPY build.gradle .
+COPY settings.gradle .
+COPY gradlew .
+COPY gradle/wrapper gradle/wrapper
+
+RUN ./gradlew build --no-daemon -xtest
+
+COPY . .
+
+EXPOSE 8080
+
+CMD ["java","-jar","build/libs/webhook-manager-0.0.1-SNAPSHOT.jar"]

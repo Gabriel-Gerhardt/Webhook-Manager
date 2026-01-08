@@ -22,5 +22,8 @@ public class Url {
     private String url;
 
     private List<String> events;
-
+    public Url(String url, List<String> events) {
+        this.url = url;
+        this.events = events;
+    }
 }
