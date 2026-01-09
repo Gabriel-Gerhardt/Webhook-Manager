@@ -44,19 +44,16 @@ public class BookService implements BookServiceContract {
         Map<String, Object> body = new HashMap<>();
         body.put("payload", book);
         body.put("event", "create_book");
-        try {
-            String payload = objectMapper.writeValueAsString(body);
+
             //assertBookDoesNotExist(book);
             //bookRepo.insertBook(book);
             restClient.post()
                     .uri(PAYLOAD_URL)
                     .contentType(APPLICATION_JSON)
-                    .body(payload)
+                    .body(body)
                     .retrieve()
                     .toBodilessEntity();
-        } catch (JsonProcessingException e){
-            throw new RuntimeException("Erro ao serializar book para JSON", e);
-        }
+        System.out.println(body);
     }
 
     @Override

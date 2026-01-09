@@ -1,9 +1,15 @@
 package com.project.library.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Book {
     long id;
     String title;
+
+    @JsonProperty("author_name")
     String authorName;
+
+    @JsonProperty("publish_year")
     int publishYear;
 
     public Book(long id, String title, String authorName, int publishYear) {
