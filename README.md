@@ -32,4 +32,4 @@ When an event occurs, the service notifies the Webhook Manager with the event da
 
 
 ## Diagram
-(images/webhookDiagram.png.png)
+(images/webhookDiagram.png)
