@@ -1,0 +1,1 @@
+Um novo livro foi publicado-> {id=1, title=sei, author_name=231, publish_year=1212}

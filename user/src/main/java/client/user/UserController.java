@@ -3,7 +3,7 @@ package client.user;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/notification")
+@RequestMapping("/notify")
 public class UserController {
 
 
@@ -13,9 +13,10 @@ public class UserController {
     }
 
 
-    @PostMapping()
+    @PostMapping
     public void receiveNotification(@RequestBody String payload){
-         service.notification(payload);
+        System.out.println(payload);
+        service.notification(payload);
     }
 
 }
