@@ -29,3 +29,7 @@ When an event occurs, the service notifies the Webhook Manager with the event da
 - Maintain a mapping between **events** and **subscribed client URLs**
 - Receive event notifications from **producer services**
 - Dispatch payloads to **all client URLs subscribed** to the triggered event
+
+
+## Diagram
+(images/webhookDiagram.png.png)
